@@ -3,24 +3,15 @@ package main
 import (
 	"errors"
 	"fmt"
+	"net/http"
 
-	"github.com/amiltimore2016/gowebservice/models"
+	"github.com/amiltimore2016/gowebservice/controllers"
 )
 
 func main() {
-	fmt.Println("Hello World")
-	u := models.User{
-		ID:        2,
-		FirstName: "Tricia",
-		LastName:  "Munster",
-	}
-	fmt.Println(u.FirstName, u.FirstName, u.ID)
-	models.TestPointer()
-	/*CarUsers := new(models.users[])*/
-	port := 3000
-	startWebServer(port, 2)
-	_, status := startWebServer(port, 2)
-	fmt.Println(status)
+
+	controllers.RegisterControllers()
+	http.ListenAndServe(":3000", nil)
 }
 
 func startWebServer(port int, numRetries int) (int, error) {
